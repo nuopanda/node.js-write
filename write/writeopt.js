@@ -176,7 +176,7 @@ app.get('/range/:user/:startDay/:numDays',async (req, res, next)=>{
 // [End Range Day Handler]
 
 // [Start emptying the database]
-app.post('/delete', async (req, res, next) => {
+app.delete('/delete', async (req, res, next) => {
    const step_record_query = ds.createQuery("StepRecord");
    const [step_records] = await ds.runQuery(step_record_query);
    const recent_day_query = ds.createQuery('RecentDay');
