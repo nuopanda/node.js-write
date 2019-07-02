@@ -187,13 +187,10 @@ app.delete('/delete', async (req, res, next) => {
    for(let i in step_records){
       batch.push(step_records[i][ds.KEY]);
    }
-   console.log("check point1");
    for(let i in recent_days){
       batch.push(recent_days[i][ds.KEY]);
    }
-   console.log("check point2");
    await ds.delete(batch);
-   console.log("check point3");
    res.send("deleted");
 });
 // [End emptying the database]
