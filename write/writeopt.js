@@ -175,28 +175,32 @@ app.get('/range/:user/:startDay/:numDays',async (req, res, next)=>{
 });
 // [End Range Day Handler]
 
-// [Start emptying the database]
+
+//[Start emptying the database]
 app.delete('/delete', async (req, res, next) => {
    const step_record_query = ds.createQuery("StepRecord");
    const [step_records] = await ds.runQuery(step_record_query);
    const recent_day_query = ds.createQuery('RecentDay');
    const [recent_days] = await ds.runQuery(recent_day_query);
    const batch = [];
+   console.log(batch);
    for(let i in step_records){
       batch.push(step_records[i][ds.KEY]);
    }
+   console.log("check point1");
    for(let i in recent_days){
       batch.push(recent_days[i][ds.KEY]);
    }
-   //console.log(batch);
+   console.log("check point2");
    await ds.delete(batch);
+   console.log("check point3");
    res.send("deleted");
 });
 // [End emptying the database]
 if (module === require.main) {
    // [START server]
    // Start the server
-   const server = app.listen(process.env.PORT || 8020, () => {
+   const server = app.listen(process.env.PORT || 8030, () => {
       const port = server.address().port;
       console.log(`App listening on port ${port}`);
    });
